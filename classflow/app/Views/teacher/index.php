@@ -1,0 +1,1 @@
+<div class="list-group"><?php foreach($sections as $s): ?><a class="list-group-item list-group-item-action" href="/teacher/sections/<?= (int)$s['id'] ?>"><strong><?= e($s['code'].' · '.$s['title']) ?></strong> — <?= e($s['name']) ?> <?= $s['is_active']?'':'(inactive)' ?></a><?php endforeach ?></div><?php if(!$sections): ?><p>No sections assigned yet.</p><?php endif ?>

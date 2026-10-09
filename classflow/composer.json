@@ -1,0 +1,5 @@
+{
+  "name": "classflow/lms", "description": "ClassFlow LMS Phase 1 MVP", "type": "project",
+  "require": {"php": "^8.3", "ext-pdo": "*", "ext-pdo_mysql": "*", "ext-fileinfo": "*"},
+  "autoload": {"psr-4": {"App\\": "app/"}}, "scripts": {"check": "php tests/smoke.php"}
+}

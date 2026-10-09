@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?= e($title??'ClassFlow') ?> — ClassFlow LMS</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link href="/assets/app.css" rel="stylesheet"></head>
+<body><nav class="navbar navbar-expand navbar-dark bg-primary"><div class="container"><a class="navbar-brand fw-bold" href="/">ClassFlow LMS</a><?php if($current=\App\Core\Security::user()): ?><span class="text-white ms-auto me-3"><?= e($current['name']) ?> · <?= e(ucfirst($current['role'])) ?></span><form method="post" action="/logout"><input type="hidden" name="_csrf" value="<?= csrf() ?>"><button class="btn btn-outline-light btn-sm">Sign out</button></form><?php endif ?></div></nav>
+<main class="container py-4"><h1 class="h3 mb-4"><?= e($title??'ClassFlow') ?></h1><?php if($flash=$_SESSION['flash']??null): unset($_SESSION['flash']); ?><div class="alert alert-info" role="alert"><?= e($flash) ?></div><?php endif ?>

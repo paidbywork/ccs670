@@ -1,26 +1,59 @@
-# ClassFlow LMS — Phase 1: Requirements & System Design
+# ClassFlow LMS
 
 ## Project description
-ClassFlow is a custom-MVC web application developed in native object-oriented PHP and MySQL. The MVP supports administrator-created accounts, teacher-owned courses, code-based student enrollment, materials, assignment submissions, grading and feedback release.
+ClassFlow is a custom MVC web application built with native, object-oriented PHP and MySQL. The MVP supports administrator-created accounts, teacher-owned courses, code-based student enrollment, materials, assignment submissions, grading, and feedback release.
 
 ## Objectives
 - Demonstrate encapsulation, abstraction, inheritance where useful, and polymorphism in a PHP OOP application.
 - Implement an end-to-end assignment submission → grading → feedback release workflow.
-- Enforce authorization, referential integrity, unique enrollment and unique final submission.
+- Enforce authorization, referential integrity, unique enrollment, and unique final submission.
 
 ## Actors
-Admin: account management. Teacher: courses, materials, assignments, grades. Student: enrollment, materials, submissions, released feedback.
+- Admin: Manages user accounts, courses, sections, and teacher assignments.
+- Teacher: Manages learning materials, assignments, submissions, grading, and feedback within assigned sections.
+- Student: Enrolls in sections using enrollment codes, accesses learning materials, submits assignments, and views released grades and feedback.
 
-## Finalized MVP decisions
-- Admin creates every student and teacher account (no public registration).
-- Students join active courses using the unpredictable `enrollment_code`.
-- Each student may submit an assignment only once, and the submission is final.
-- The teacher responsible for the course can grade and release feedback.
-- Draft grades are visible to teachers only; students may view released grades on their own submissions only.
-- Late submissions are rejected by default.
+## Key Features
+ClassFlow LMS provides the following core features:
 
-## Functional modules
-Authentication; account management; courses; enrollments; materials; assignments; submissions; grades.
+1. **User Authentication and Role-Based Access Control**
+   - Secure login and logout for administrators, teachers, and students.
+   - Role-specific dashboards and access permissions.
+
+2. **User Account Management**
+   - Administrators can create and manage teacher and student accounts.
+   - Public user registration is disabled.
+
+3. **Course Management**
+   - Administrators can create, update, activate, and deactivate courses.
+   - Each course can contain multiple class sections.
+   - Administrators manage course information and organization.
+
+4. **Section Management**
+   - Administrators can create and manage sections under existing courses.
+   - Each section is assigned to one teacher.
+   - Teachers can manage learning activities within their assigned sections.
+   - Each section has a unique enrollment code.
+
+5. **Section Enrollment**
+   - Students can enroll in sections using valid enrollment codes.
+   - Students can enroll in multiple sections across different courses.
+   - The system prevents duplicate enrollment in the same section.
+   - Enrolled students can access learning materials and assignments within their respective sections.
+
+6. **Learning Materials Management**
+   - Teachers can upload and manage course materials.
+   - Enrolled students can access and download learning resources.
+
+7. **Assignment Management**
+   - Teachers can create assignments with instructions and deadlines.
+   - Students can view assignments and submit their work.
+   - Only one final submission is permitted per assignment.
+
+8. **Grading and Feedback**
+   - Teachers can evaluate submissions and provide grades and feedback.
+   - Teachers can save draft grades before releasing them.
+   - Students can view their grades and feedback after release.
 
 ## UML artifacts
 - [ERD](uml/erd.mmd)
@@ -29,36 +62,44 @@ Authentication; account management; courses; enrollments; materials; assignments
 - [Sequence Diagram](uml/sequence.mmd)
 - [Activity Diagram](uml/activity.mmd)
 
-## Database
-See [`../database/schema.sql`](../database/schema.sql) for runnable MySQL 8 DDL. It implements seven entity tables, unique constraints, indexes, check constraints and foreign keys. Cross-table role, ownership, membership, deadline and score-limit rules are enforced in PHP services with transactions.
-
 ## Technology stack
 PHP 8.3+, custom MVC, PDO, MySQL 8, HTML/CSS, Bootstrap 5, Vanilla JavaScript, Composer PSR-4 autoloading, Git.
 
-## Proposed project structure
-`app/{Controllers,Models,Services,Repositories,Interfaces,Middleware,Core,Views}`; `bootstrap`; `config`; `database`; `docs/uml`; `public`; `routes`; `storage/uploads`; `tests`.
+## Project Structure
 
-## Setup / execution (Phase 1 schema only)
+The ClassFlow LMS follows a custom Model-View-Controller (MVC)
+architecture using Native PHP and Object-Oriented Programming.
+
+```text
+classflow/
+├── app/
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Services/
+│   ├── Repositories/
+│   ├── Interfaces/
+│   ├── Middleware/
+│   ├── Core/
+│   └── Views/
+├── bootstrap/
+├── config/
+├── database/
+├── docs/
+│   └── uml/
+├── public/
+│   ├── index.php
+│   └── assets/
+├── routes/
+├── storage/
+├── tests/
+├── .env.example
+├── .gitignore
+├── composer.json
+└── README.md
+```
+
+## Setup/execution (Phase 1 schema only)
 1. Start MySQL 8.
 2. Execute `database/schema.sql` using MySQL Workbench, phpMyAdmin, or `mysql -u root -p < database/schema.sql`.
 3. Use `SHOW TABLES;` in the `classflow` database to confirm the seven tables.
 4. Application routes, PHP models, seed accounts, and migrations will be implemented in Phase 2; this Phase 1 bundle is design/schema documentation, not a running app.
-
-## Security and implementation notes
-- Document root must be `public/`; files in `storage/uploads/` are private.
-- Hash passwords using PHP `password_hash()`, verify via `password_verify()`.
-- Validate authentication, authorizations and CSRF tokens for state-changing operations.
-- Validate file MIME/content, extensions, upload size; generate random storage names.
-- Use PDO prepared statements. Escape dynamic HTML output.
-- Use a consistent configured timezone and application-generated submission time.
-- Insert final submissions transactionally; the unique `(assignment_id, student_id)` constraint handles concurrent requests.
-- No direct destructive deletion of users, courses or academic records in MVP.
-
-## Design notes
-- The ER diagram is conceptual; detailed constraints are expressed in DDL.
-- Fixed user roles are stored as enum for MVP (no separate role or subtype table).
-- Course `code` identifies a course; `enrollment_code` is the secret joining code.
-- One submission can have zero or one grade; a released grade must have `released_at`.
-- Check `grades.score <= assignments.max_score` at the service layer: it spans tables.
-- File metadata includes private storage path, original filename, MIME and size.
-- MVP excludes quizzes, messaging, video, email notifications, attendance, grade aggregation and repeat submissions.

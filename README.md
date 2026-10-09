@@ -53,22 +53,149 @@ ClassFlow LMS provides the following core features:
 - [Sequence Diagram](uml/sequence.mmd)
 - [Activity Diagram](uml/activity.mmd)
 
-## Database
-See [`../database/schema.sql`](../database/schema.sql) for runnable MySQL 8 DDL. It implements seven entity tables, unique constraints, indexes, check constraints and foreign keys. Cross-table role, ownership, membership, deadline and score-limit rules are enforced in PHP services with transactions.
-
 ## Technology stack
 PHP 8.3+, custom MVC, PDO, MySQL 8, HTML/CSS, Bootstrap 5, Vanilla JavaScript, Composer PSR-4 autoloading, Git.
 
 ## Proposed project structure
-`app/{Controllers,Models,Services,Repositories,Interfaces,Middleware,Core,Views}`; 
-`bootstrap`; 
-`config`; 
-`database`; 
-`docs/uml`; 
-`public`; 
-`routes`; 
-`storage/uploads`; 
-`tests`.
+classflow/
+│
+├── app/
+│   │
+│   ├── Controllers/
+│   │   ├── AuthController.php
+│   │   ├── DashboardController.php
+│   │   ├── UserController.php
+│   │   ├── CourseController.php
+│   │   ├── EnrollmentController.php
+│   │   ├── MaterialController.php
+│   │   ├── AssignmentController.php
+│   │   ├── SubmissionController.php
+│   │   └── GradeController.php
+│   │
+│   ├── Models/
+│   │   ├── User.php
+│   │   ├── Course.php
+│   │   ├── Enrollment.php
+│   │   ├── Material.php
+│   │   ├── Assignment.php
+│   │   ├── Submission.php
+│   │   └── Grade.php
+│   │
+│   ├── Services/
+│   │   ├── AuthService.php
+│   │   ├── CourseService.php
+│   │   ├── EnrollmentService.php
+│   │   ├── AssignmentService.php
+│   │   ├── SubmissionService.php
+│   │   └── GradingService.php
+│   │
+│   ├── Repositories/
+│   │   ├── UserRepository.php
+│   │   ├── CourseRepository.php
+│   │   ├── EnrollmentRepository.php
+│   │   ├── AssignmentRepository.php
+│   │   ├── SubmissionRepository.php
+│   │   └── PdoGradeRepository.php
+│   │
+│   ├── Interfaces/
+│   │   └── GradeRepositoryInterface.php
+│   │
+│   ├── Middleware/
+│   │   ├── AuthMiddleware.php
+│   │   ├── RoleMiddleware.php
+│   │   └── CsrfMiddleware.php
+│   │
+│   ├── Core/
+│   │   ├── Router.php
+│   │   ├── Controller.php
+│   │   ├── Database.php
+│   │   ├── View.php
+│   │   ├── Request.php
+│   │   ├── Response.php
+│   │   └── Session.php
+│   │
+│   └── Views/
+│       ├── layouts/
+│       │   ├── main.php
+│       │   └── guest.php
+│       │
+│       ├── auth/
+│       │   └── login.php
+│       │
+│       ├── admin/
+│       │   ├── dashboard.php
+│       │   └── users/
+│       │
+│       ├── teacher/
+│       │   ├── dashboard.php
+│       │   ├── courses/
+│       │   ├── materials/
+│       │   ├── assignments/
+│       │   └── grading/
+│       │
+│       ├── student/
+│       │   ├── dashboard.php
+│       │   ├── courses/
+│       │   ├── assignments/
+│       │   └── grades/
+│       │
+│       └── errors/
+│           ├── 403.php
+│           └── 404.php
+│
+├── bootstrap/
+│   └── app.php
+│
+├── config/
+│   ├── app.php
+│   └── database.php
+│
+├── database/
+│   ├── migrations/
+│   ├── seeds/
+│   └── schema.sql
+│
+├── docs/
+│   ├── uml/
+│   │   ├── erd.mmd
+│   │   ├── use-case.mmd
+│   │   ├── class-diagram.mmd
+│   │   ├── sequence.mmd
+│   │   └── activity.mmd
+│   │
+│   └── requirements.md
+│
+├── public/
+│   ├── index.php
+│   ├── .htaccess
+│   └── assets/
+│       ├── css/
+│       │   └── app.css
+│       ├── js/
+│       │   └── app.js
+│       └── images/
+│
+├── routes/
+│   └── web.php
+│
+├── storage/
+│   ├── uploads/
+│   │   ├── materials/
+│   │   └── submissions/
+│   └── logs/
+│
+├── tests/
+│   ├── Unit/
+│   └── Feature/
+│
+├── vendor/
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── composer.json
+├── composer.lock
+└── README.md
 
 ## Setup/execution (Phase 1 schema only)
 1. Start MySQL 8.

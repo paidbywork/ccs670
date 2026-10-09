@@ -9,7 +9,9 @@ ClassFlow is a custom MVC web application built with native, object-oriented PHP
 - Enforce authorization, referential integrity, unique enrollment, and unique final submission.
 
 ## Actors
-Admin: account management. Teacher: courses, materials, assignments, grades. Student: enrollment, materials, submissions, released feedback.
+Admin: account management. 
+Teacher: courses, materials, assignments, grades. 
+Student: enrollment, materials, submissions, released feedback.
 
 ## Finalized MVP decisions
 - Admin creates every student and teacher account (no public registration).

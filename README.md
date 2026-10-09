@@ -25,23 +25,32 @@ ClassFlow LMS provides the following core features:
    - Public user registration is disabled.
 
 3. **Course Management**
-   - Teachers can create and manage their assigned courses.
-   - Each course has a unique enrollment code.
+   - Administrators can create, update, activate, and deactivate courses.
+   - Each course can contain multiple class sections.
+   - Administrators manage course information and organization.
 
-4. **Course Enrollment**
-   - Students can join courses using a valid enrollment code.
-   - The system prevents duplicate enrollments.
+4. **Section Management**
+   - Administrators can create and manage sections under existing courses.
+   - Each section is assigned to one teacher.
+   - Teachers can manage learning activities within their assigned sections.
+   - Each section has a unique enrollment code.
 
-5. **Learning Materials Management**
+5. **Section Enrollment**
+   - Students can enroll in sections using valid enrollment codes.
+   - Students can enroll in multiple sections across different courses.
+   - The system prevents duplicate enrollment in the same section.
+   - Enrolled students can access learning materials and assignments within their respective sections.
+
+6. **Learning Materials Management**
    - Teachers can upload and manage course materials.
    - Enrolled students can access and download learning resources.
 
-6. **Assignment Management**
+7. **Assignment Management**
    - Teachers can create assignments with instructions and deadlines.
    - Students can view assignments and submit their work.
    - Only one final submission is permitted per assignment.
 
-7. **Grading and Feedback**
+8. **Grading and Feedback**
    - Teachers can evaluate submissions and provide grades and feedback.
    - Teachers can save draft grades before releasing them.
    - Students can view their grades and feedback after release.

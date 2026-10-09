@@ -94,22 +94,3 @@ classflow/
 2. Execute `database/schema.sql` using MySQL Workbench, phpMyAdmin, or `mysql -u root -p < database/schema.sql`.
 3. Use `SHOW TABLES;` in the `classflow` database to confirm the seven tables.
 4. Application routes, PHP models, seed accounts, and migrations will be implemented in Phase 2; this Phase 1 bundle is design/schema documentation, not a running app.
-
-## Security and implementation notes
-- Document root must be `public/`; files in `storage/uploads/` are private.
-- Hash passwords using PHP `password_hash()`, verify via `password_verify()`.
-- Validate authentication, authorization, and CSRF tokens for state-changing operations.
-- Validate file MIME/content, extensions, upload size; generate random storage names.
-- Use PDO prepared statements. Escape dynamic HTML output.
-- Use a consistent configured timezone and application-generated submission time.
-- Insert final submissions transactionally; the unique `(assignment_id, student_id)` constraint handles concurrent requests.
-- No direct destructive deletion of users, courses or academic records in MVP.
-
-## Design notes
-- The ER diagram is conceptual; detailed constraints are expressed in DDL (Data Definition Language).
-- Fixed user roles are stored as an enum for MVP (no separate role or subtype table).
-- Course `code` identifies a course; `enrollment_code` is the secret joining code.
-- One submission can have zero or one grade; a released grade must have `released_at`.
-- Check `grades.score <= assignments.max_score` at the service layer: it spans tables.
-- File metadata includes private storage path, original filename, MIME, and size.
-- MVP excludes quizzes, messaging, video, email notifications, attendance, grade aggregation, and repeat submissions.

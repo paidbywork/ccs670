@@ -13,16 +13,38 @@ ClassFlow is a custom MVC web application built with native, object-oriented PHP
 - Teacher: courses, materials, assignments, grades. 
 - Student: enrollment, materials, submissions, released feedback.
 
-## Finalized MVP decisions
-- Admin creates every student and teacher account (no public registration).
-- Students join active courses using the unpredictable `enrollment_code`.
-- Each student may submit an assignment only once, and the submission is final.
-- The teacher responsible for the course can grade and release feedback.
-- Draft grades are visible to teachers only; students may view released grades on their own submissions only.
-- Late submissions are rejected by default.
+## Key Features
+ClassFlow LMS provides the following core features:
 
-## Functional modules
-Authentication; account management; courses; enrollments; materials; assignments; submissions; grades.
+1. **User Authentication and Role-Based Access Control**
+   - Secure login and logout for administrators, teachers, and students.
+   - Role-specific dashboards and access permissions.
+
+2. **User Account Management**
+   - Administrators can create and manage teacher and student accounts.
+   - Public user registration is disabled.
+
+3. **Course Management**
+   - Teachers can create and manage their assigned courses.
+   - Each course has a unique enrollment code.
+
+4. **Course Enrollment**
+   - Students can join courses using a valid enrollment code.
+   - The system prevents duplicate enrollments.
+
+5. **Learning Materials Management**
+   - Teachers can upload and manage course materials.
+   - Enrolled students can access and download learning resources.
+
+6. **Assignment Management**
+   - Teachers can create assignments with instructions and deadlines.
+   - Students can view assignments and submit their work.
+   - Only one final submission is permitted per assignment.
+
+7. **Grading and Feedback**
+   - Teachers can evaluate submissions and provide grades and feedback.
+   - Teachers can save draft grades before releasing them.
+   - Students can view their grades and feedback after release.
 
 ## UML artifacts
 - [ERD](uml/erd.mmd)

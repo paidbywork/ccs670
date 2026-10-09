@@ -1,12 +1,12 @@
-# ClassFlow LMS — Phase 1: Requirements & System Design
+# ClassFlow LMS
 
 ## Project description
-ClassFlow is a custom-MVC web application developed in native object-oriented PHP and MySQL. The MVP supports administrator-created accounts, teacher-owned courses, code-based student enrollment, materials, assignment submissions, grading and feedback release.
+ClassFlow is a custom MVC web application built with native, object-oriented PHP and MySQL. The MVP supports administrator-created accounts, teacher-owned courses, code-based student enrollment, materials, assignment submissions, grading, and feedback release.
 
 ## Objectives
 - Demonstrate encapsulation, abstraction, inheritance where useful, and polymorphism in a PHP OOP application.
 - Implement an end-to-end assignment submission → grading → feedback release workflow.
-- Enforce authorization, referential integrity, unique enrollment and unique final submission.
+- Enforce authorization, referential integrity, unique enrollment, and unique final submission.
 
 ## Actors
 Admin: account management. Teacher: courses, materials, assignments, grades. Student: enrollment, materials, submissions, released feedback.
@@ -36,9 +36,17 @@ See [`../database/schema.sql`](../database/schema.sql) for runnable MySQL 8 DDL.
 PHP 8.3+, custom MVC, PDO, MySQL 8, HTML/CSS, Bootstrap 5, Vanilla JavaScript, Composer PSR-4 autoloading, Git.
 
 ## Proposed project structure
-`app/{Controllers,Models,Services,Repositories,Interfaces,Middleware,Core,Views}`; `bootstrap`; `config`; `database`; `docs/uml`; `public`; `routes`; `storage/uploads`; `tests`.
+`app/{Controllers,Models,Services,Repositories,Interfaces,Middleware,Core,Views}`; 
+`bootstrap`; 
+`config`; 
+`database`; 
+`docs/uml`; 
+`public`; 
+`routes`; 
+`storage/uploads`; 
+`tests`.
 
-## Setup / execution (Phase 1 schema only)
+## Setup/execution (Phase 1 schema only)
 1. Start MySQL 8.
 2. Execute `database/schema.sql` using MySQL Workbench, phpMyAdmin, or `mysql -u root -p < database/schema.sql`.
 3. Use `SHOW TABLES;` in the `classflow` database to confirm the seven tables.
@@ -47,7 +55,7 @@ PHP 8.3+, custom MVC, PDO, MySQL 8, HTML/CSS, Bootstrap 5, Vanilla JavaScript, C
 ## Security and implementation notes
 - Document root must be `public/`; files in `storage/uploads/` are private.
 - Hash passwords using PHP `password_hash()`, verify via `password_verify()`.
-- Validate authentication, authorizations and CSRF tokens for state-changing operations.
+- Validate authentication, authorization, and CSRF tokens for state-changing operations.
 - Validate file MIME/content, extensions, upload size; generate random storage names.
 - Use PDO prepared statements. Escape dynamic HTML output.
 - Use a consistent configured timezone and application-generated submission time.
@@ -55,10 +63,10 @@ PHP 8.3+, custom MVC, PDO, MySQL 8, HTML/CSS, Bootstrap 5, Vanilla JavaScript, C
 - No direct destructive deletion of users, courses or academic records in MVP.
 
 ## Design notes
-- The ER diagram is conceptual; detailed constraints are expressed in DDL.
-- Fixed user roles are stored as enum for MVP (no separate role or subtype table).
+- The ER diagram is conceptual; detailed constraints are expressed in DDL (Data Definition Language).
+- Fixed user roles are stored as an enum for MVP (no separate role or subtype table).
 - Course `code` identifies a course; `enrollment_code` is the secret joining code.
 - One submission can have zero or one grade; a released grade must have `released_at`.
 - Check `grades.score <= assignments.max_score` at the service layer: it spans tables.
-- File metadata includes private storage path, original filename, MIME and size.
-- MVP excludes quizzes, messaging, video, email notifications, attendance, grade aggregation and repeat submissions.
+- File metadata includes private storage path, original filename, MIME, and size.
+- MVP excludes quizzes, messaging, video, email notifications, attendance, grade aggregation, and repeat submissions.

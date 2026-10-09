@@ -56,10 +56,10 @@ ClassFlow LMS provides the following core features:
    - Students can view their grades and feedback after release.
 
 ## UML artifacts
-- [Use Case](uml/classflow-activity-diagram.png) (functional overview; formal UML actor-ellipse version may be drawn in diagrams.net)
-- [Class Diagram](uml/classflow-class-diagram.png)
-- [Sequence Diagram](uml/classflow-sequence-diagram.png)
-- [Activity Diagram](uml/classflow-use-case-diagram.png)
+- [Use Case](docs/uml/classflow-activity-diagram.png)
+- [Class Diagram](docs/uml/classflow-class-diagram.png)
+- [Sequence Diagram](docs/uml/classflow-sequence-diagram.png)
+- [Activity Diagram](docs/uml/classflow-use-case-diagram.png)
 
 ## Technology stack
 PHP 8.3+, custom MVC, PDO, MySQL 8, HTML/CSS, Bootstrap 5, Vanilla JavaScript, Composer PSR-4 autoloading, Git.

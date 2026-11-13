@@ -1,2 +1,8 @@
-<?php require dirname(__DIR__).'/partials/dashboard_stats.php'; ?>
-<div id="my-sections" class="list-group"><?php foreach($sections as $s): ?><a class="list-group-item list-group-item-action" href="/teacher/sections/<?= (int)$s['id'] ?>"><strong><?= e($s['code'].' · '.$s['title']) ?></strong> — <?= e($s['name']) ?> <?= $s['is_active']?'':'(inactive)' ?></a><?php endforeach ?></div><?php if(!$sections): ?><p>No sections assigned yet.</p><?php endif ?>
+<?php require dirname(__DIR__) . '/partials/dashboard_stats.php'; ?>
+<div class="card">
+<div class="card-body">
+<h2 class="h5">Teaching workspace</h2>
+<p class="text-muted">Your assigned sections, learning materials, assignments, and submissions are available on dedicated pages.</p>
+<a class="btn btn-primary" href="/teacher/sections">View my sections</a>
+</div>
+</div>

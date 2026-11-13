@@ -2,7 +2,35 @@
 $metricIcons = ['teachers'=>'♙', 'students'=>'♙','courses'=>'▤','sections'=>'▥','assignments'=>'▧','submissions'=>'↗','ungraded'=>'◷','past_due'=>'◷','overdue'=>'◷','pending'=>'◷','released_grades'=>'✓','enrolled_sections'=>'▥','assigned_sections'=>'▥','active_teachers'=>'♙','active_students'=>'♙','pending_assignments'=>'◷','overdue_assignments'=>'◷'];
 $metricDescriptions = ['students'=>'Learners on the platform','active_students'=>'Active learners','teachers'=>'Teaching accounts','active_teachers'=>'Active instructors','courses'=>'Available courses','sections'=>'Course sections','assigned_sections'=>'Your teaching sections','enrolled_sections'=>'Your active enrollments','assignments'=>'Created coursework','submissions'=>'Received or completed work','ungraded'=>'Awaiting assessment','pending_assignments'=>'To be submitted','overdue_assignments'=>'Past the due date','past_due'=>'Past the due date','released_grades'=>'Published results'];
 ?>
-<section class="overview" aria-label="Dashboard overview"><div class="section-heading"><div><h2>Overview</h2><p>A quick snapshot of your learning workspace</p></div><span class="section-caption">LIVE SUMMARY</span></div><div class="row g-3 mb-4">
+<section class="overview" aria-label="Dashboard overview">
+<div class="section-heading">
+<div>
+<h2>Overview</h2>
+<p>A quick snapshot of your learning workspace</p>
+</div>
+<span class="section-caption">LIVE SUMMARY</span>
+</div>
+<div class="row g-3 mb-4">
+
 <?php foreach ($stats as $metric => $value): ?>
-<div class="col-6 col-lg-4 col-xxl-3"><div class="stat-card"><div class="stat-top"><span class="stat-icon"><?= e($metricIcons[$metric] ?? '▦') ?></span><span class="stat-deco">↗</span></div><div class="stat-label"><?= e(ucwords(str_replace('_', ' ', $metric))) ?></div><div class="stat-value"><?= (int)$value ?></div><div class="stat-description"><?= e($metricDescriptions[$metric] ?? 'Workspace overview') ?></div></div></div>
-<?php endforeach ?></div></section>
+
+<div class="col-6 col-lg-4 col-xxl-3">
+<div class="stat-card">
+<div class="stat-top">
+<span class="stat-icon"><?= e($metricIcons[$metric] ?? '▦') ?>
+</span>
+<span class="stat-deco">↗</span>
+</div>
+<div class="stat-label"><?= e(ucwords(str_replace('_', ' ', $metric))) ?>
+</div>
+<div class="stat-value"><?= (int)$value ?>
+</div>
+<div class="stat-description"><?= e($metricDescriptions[$metric] ?? 'Workspace overview') ?>
+</div>
+</div>
+</div>
+
+<?php endforeach ?>
+
+</div>
+</section>

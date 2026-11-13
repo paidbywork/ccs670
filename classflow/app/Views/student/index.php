@@ -1,2 +1,11 @@
-<?php require dirname(__DIR__).'/partials/dashboard_stats.php'; ?>
-<div id="enroll" class="card mb-4"><div class="card-body"><h2 class="h5">Enroll in a section</h2><form method="post" action="/student/enroll" class="row g-2"><input type="hidden" name="_csrf" value="<?= csrf() ?>"><div class="col-sm-8"><input required name="enrollment_code" class="form-control" placeholder="Enter section enrollment code"></div><div class="col-sm-4"><button class="btn btn-primary">Enroll</button></div></form></div></div><h2 class="h5" id="my-sections">My sections</h2><div class="list-group"><?php foreach($sections as $s): ?><a class="list-group-item list-group-item-action" href="/student/sections/<?= (int)$s['id'] ?>"><?= e($s['code'].' · '.$s['title'].' — '.$s['name']) ?></a><?php endforeach ?></div><?php if(!$sections): ?><p class="mt-3">No sections yet. Ask your teacher for an enrollment code.</p><?php endif ?>
+<?php require dirname(__DIR__) . '/partials/dashboard_stats.php'; ?>
+<div class="card">
+<div class="card-body">
+<h2 class="h5">Learning workspace</h2>
+<p class="text-muted">Browse your enrolled sections and keep track of your coursework.</p>
+<div class="d-flex gap-2 flex-wrap">
+<a class="btn btn-primary" href="/student/sections">My enrolled sections</a>
+<a class="btn btn-outline-primary" href="/student/join">Join a section</a>
+</div>
+</div>
+</div>
